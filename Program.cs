@@ -9,6 +9,7 @@ namespace laboratorio06
             Console.WriteLine("Bienvenido al gestionador de tus series!");
 
             Gestionador miGestionador = new Gestionador();
+            miGestionador.CargarSeries();
 
             while (true) {
                 Console.WriteLine("Opciones disponibles:");
