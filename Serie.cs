@@ -3,9 +3,10 @@ namespace laboratorio06
 {
     public class Serie
     {
-	    private string nombre, temporada, estado, anio;
+	    private string nombre, temporada, estado;
+		private int anio;
 
-        public Serie(string nombreSerie, string temporadaSerie, int anioTemporada, string estadoSerie)
+		public Serie(string nombreSerie, string temporadaSerie, int anioTemporada, string estadoSerie)
         {
 			nombre = nombreSerie;
 			temporada = temporadaSerie;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 
 namespace laboratorio06
@@ -26,12 +27,15 @@ namespace laboratorio06
 
         public void GuardarSeries()
         {
-            // TODO
+            StreamWriter writer = new StreamWriter("series.txt");
+            foreach(Serie miSerie in series) {
+                writer.WriteLine(miSerie.ToString());
+            }
+            writer.Close();
         }
 
         public void CargarSeries() 
         {
-            // TODO
         }
     }
 }
