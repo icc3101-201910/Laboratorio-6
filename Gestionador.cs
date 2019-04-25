@@ -25,6 +25,11 @@ namespace laboratorio06
             }
         }
 
+        public Serie GetSerie(int posicion)
+        {
+            return series[posicion];
+        }
+
         public void GuardarSeries()
         {
             StreamWriter writer = new StreamWriter("series.txt");
@@ -63,6 +68,7 @@ namespace laboratorio06
                     // Siguiente linea!
                     linea = reader.ReadLine();
                 }
+                reader.Close(); // <--- no lo habia agregado en el commit anterior jaja...
             }
         }
     }

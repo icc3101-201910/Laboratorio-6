@@ -14,6 +14,10 @@ namespace laboratorio06
 			anio = anioTemporada;
         }
 
+		public void SetEstado(string nuevoEstado) {
+			estado = nuevoEstado;
+		}
+
 		public override string ToString() {
 			return $"{nombre} | {temporada} | {anio} | {estado}";
 		}

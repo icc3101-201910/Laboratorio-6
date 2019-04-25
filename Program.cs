@@ -16,7 +16,8 @@ namespace laboratorio06
                 Console.WriteLine("[1] Agregar serie");
                 Console.WriteLine("[2] Mostrar series");
                 Console.WriteLine("[3] Guardar series");
-                Console.WriteLine("[4] Cerrar programa");
+                Console.WriteLine("[4] Editar estado de serie");
+                Console.WriteLine("[5] Cerrar programa");
 
                 string opcion = Console.ReadLine();
 
@@ -40,6 +41,18 @@ namespace laboratorio06
                     miGestionador.MostrarSeries();
                 } else if (opcion == "3") {
                     miGestionador.GuardarSeries();
+                } else if (opcion == "4") {
+                    Console.WriteLine("Elige la serie a editar (ingresa su posición):");
+                    miGestionador.MostrarSeries();
+
+                    int posicion = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("¿Cuál es el nuevo estado?");
+                    string nuevoEstado = Console.ReadLine();
+
+                    Serie porEditar = miGestionador.GetSerie(posicion);
+                    porEditar.SetEstado(nuevoEstado);
+
                 } else {
                     Console.WriteLine("Nos vemos!");
                     break;
