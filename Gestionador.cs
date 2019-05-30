@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace laboratorio06
 {
@@ -32,44 +33,21 @@ namespace laboratorio06
 
         public void GuardarSeries()
         {
-            StreamWriter writer = new StreamWriter("series.txt");
-            foreach(Serie miSerie in series) {
-                writer.WriteLine(miSerie.ToString());
-            }
-            writer.Close();
+            Stream SaveFileStream = File.Create("series.bin");
+            BinaryFormatter serializer = new BinaryFormatter();
+            serializer.Serialize(SaveFileStream, series);
+            SaveFileStream.Close();
         }
 
         public void CargarSeries() 
         {
-            if (File.Exists("series.txt")) {
-                StreamReader reader = new StreamReader("series.txt");
-                string linea = reader.ReadLine();
-                while(linea != null)
-                {
-                    // Si revisas ToString de Serie.cs, cada atributo lo separo con "|" y siempre
-                    // tiene el mismo formato: nombre | temporada | año | estado
-                    // entonces si divido el string en |, me va a dar un "array" donde:
-                    //  elemento 0 = nombre
-                    //  elemento 1 = temporada
-                    //  elemento 2 = año
-                    //  elemento 3 = estado
-                    string[] partes = linea.Split('|');
-
-                    // Datos de la serie (nota: Trim() remueve los espacios en blanco al comienzo y al final)
-                    string nombre = partes[0].Trim();
-                    string temporada = partes[1].Trim();
-                    int anio = int.Parse(partes[2].Trim());
-                    string estado = partes[3].Trim();
-
-                    // Crear serie y agregarla a la lista
-                    Serie miSerie = new Serie(nombre, temporada, anio, estado);
-                    AgregarSerie(miSerie);
-
-                    // Siguiente linea!
-                    linea = reader.ReadLine();
-                }
-                reader.Close(); // <--- no lo habia agregado en el commit anterior jaja...
-            }
+            if (File.Exists("series.bin"))
+            {
+                Stream openFileStream = File.OpenRead("series.bin");
+                BinaryFormatter deserializer = new BinaryFormatter();
+                series = (List<Serie>)deserializer.Deserialize(openFileStream);
+                openFileStream.Close();
+            }   
         }
     }
 }

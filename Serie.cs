@@ -1,6 +1,7 @@
 ﻿using System;
 namespace laboratorio06
 {
+    [Serializable()]
     public class Serie
     {
 	    private string nombre, temporada, estado;
